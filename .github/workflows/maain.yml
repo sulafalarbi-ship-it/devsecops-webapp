@@ -1,0 +1,41 @@
+name: Flask CI Pipeline
+
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-flask-app:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+ 
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.10
+
+  
+    - name: Install dependencies
+      run: |
+        pip install flask
+
+
+    - name: Test V1
+      run: |
+        echo "Testing V1..."
+        python -m py_compile v1/app_v1.py
+        echo "V1 compiled successfully ✅"
+
+    - name: Test V2
+      run: |
+        echo "Testing V2..."
+        python -m py_compile v2/app_v2.py
+        echo "V2 compiled successfully ✅"
